@@ -1,0 +1,31 @@
+{
+  "name": "@bablr/btree",
+  "description": "Functional utilities for working with btrees such as those used in agAST",
+  "version": "0.0.0",
+  "author": "Conrad Buck<conartist6@gmail.com>",
+  "type": "module",
+  "files": [
+    "lib"
+  ],
+  "exports": {
+    ".": "./lib/index.js"
+  },
+  "sideEffects": false,
+  "dependencies": {
+    "@iter-tools/imm-stack": "1.1.0"
+  },
+  "devDependencies": {
+    "@bablr/eslint-config-base": "github:bablr-lang/eslint-config-base#49f5952efed27f94ee9b94340eb1563c440bf64e",
+    "enhanced-resolve": "^5.12.0",
+    "eslint": "^8.32.0",
+    "eslint-import-resolver-enhanced-resolve": "^1.0.5",
+    "eslint-plugin-import": "^2.27.5",
+    "expect": "29.7.0",
+    "iter-tools-es": "^7.3.1",
+    "mocha": "10.7.3",
+    "prettier": "^2.6.2"
+  },
+  "repository": "github:bablr-lang/btree",
+  "homepage": "https://github.com/bablr-lang/btree",
+  "license": "MIT"
+}

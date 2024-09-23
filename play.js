@@ -1,20 +1,13 @@
 import { add } from '@bablr/btree';
 
-let leafIdx = 0;
-const buildLeaf = () => ({ count: leafIdx++ });
+let leaf = 'a'.charCodeAt(0);
+const buildLeaf = () => {
+  return String.fromCharCode(leaf++);
+};
 
 console.log(
   JSON.stringify(
-    add(
-      [
-        4,
-        [
-          [buildLeaf(), buildLeaf()],
-          [buildLeaf(), buildLeaf()],
-        ],
-      ],
-      buildLeaf(),
-    ),
+    add([3, [[buildLeaf()], [buildLeaf(), buildLeaf()]]], buildLeaf()),
     undefined,
     '  ',
   ),

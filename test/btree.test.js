@@ -1,23 +1,25 @@
 import { expect } from 'expect';
 
-import { add, pop } from '@bablr/btree';
+import { buildModule } from '@bablr/btree/enhanceable';
 
-describe('btree', () => {
-  describe('add', () => {
+const { push, pop } = buildModule(2);
+
+describe('btree of node size 2', () => {
+  describe('push', () => {
     it('adds to a tree of size 0', () => {
-      expect(add([], 'a')).toEqual(['a']);
+      expect(push([], 'a')).toEqual(['a']);
     });
 
     it('adds to a tree of size 1', () => {
-      expect(add(['a'], 'b')).toEqual(['a', 'b']);
+      expect(push(['a'], 'b')).toEqual(['a', 'b']);
     });
 
     it('adds to a tree of size 2', () => {
-      expect(add(['a', 'b'], 'c')).toEqual([3, [['a'], ['b', 'c']]]);
+      expect(push(['a', 'b'], 'c')).toEqual([3, [['a'], ['b', 'c']]]);
     });
 
     it('adds to a tree of size 3', () => {
-      expect(add([3, [['a'], ['b', 'c']]], 'd')).toEqual([
+      expect(push([3, [['a'], ['b', 'c']]], 'd')).toEqual([
         4,
         [
           [2, [['a'], ['b']]],
@@ -28,7 +30,7 @@ describe('btree', () => {
 
     it('adds to a tree of size 4', () => {
       expect(
-        add(
+        push(
           [
             4,
             [
@@ -49,7 +51,7 @@ describe('btree', () => {
 
     it('adds to a tree of size 5', () => {
       expect(
-        add(
+        push(
           [
             5,
             [
@@ -76,7 +78,7 @@ describe('btree', () => {
 
     it('adds to a tree of size 6', () => {
       expect(
-        add(
+        push(
           [
             6,
             [
@@ -103,7 +105,7 @@ describe('btree', () => {
 
     it('adds to a tree of size 7', () => {
       expect(
-        add(
+        push(
           [
             7,
             [
@@ -143,7 +145,7 @@ describe('btree', () => {
       const addNodes = (n) => {
         let tree = [];
         for (let i = 0; i < n; i++) {
-          tree = add(tree, buildLeaf());
+          tree = push(tree, buildLeaf());
         }
         return tree;
       };

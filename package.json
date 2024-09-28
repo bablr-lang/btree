@@ -8,7 +8,8 @@
     "lib"
   ],
   "exports": {
-    ".": "./lib/index.js"
+    ".": "./lib/index.js",
+    "./enhanceable": "./lib/enhanceable.js"
   },
   "sideEffects": false,
   "dependencies": {

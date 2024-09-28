@@ -2,23 +2,23 @@ import { expect } from 'expect';
 
 import { buildModule } from '@bablr/btree/enhanceable';
 
-const { push, pop } = buildModule(2);
+const { push, pop, addAt } = buildModule(2);
 
 describe('btree of node size 2', () => {
   describe('push', () => {
-    it('adds to a tree of size 0', () => {
+    it('appends to a tree of size 0', () => {
       expect(push([], 'a')).toEqual(['a']);
     });
 
-    it('adds to a tree of size 1', () => {
+    it('appends to a tree of size 1', () => {
       expect(push(['a'], 'b')).toEqual(['a', 'b']);
     });
 
-    it('adds to a tree of size 2', () => {
+    it('appends to a tree of size 2', () => {
       expect(push(['a', 'b'], 'c')).toEqual([3, [['a'], ['b', 'c']]]);
     });
 
-    it('adds to a tree of size 3', () => {
+    it('appends to a tree of size 3', () => {
       expect(push([3, [['a'], ['b', 'c']]], 'd')).toEqual([
         4,
         [
@@ -28,7 +28,7 @@ describe('btree of node size 2', () => {
       ]);
     });
 
-    it('adds to a tree of size 4', () => {
+    it('appends to a tree of size 4', () => {
       expect(
         push(
           [
@@ -49,7 +49,7 @@ describe('btree of node size 2', () => {
       ]);
     });
 
-    it('adds to a tree of size 5', () => {
+    it('appends to a tree of size 5', () => {
       expect(
         push(
           [
@@ -76,7 +76,7 @@ describe('btree of node size 2', () => {
       ]);
     });
 
-    it('adds to a tree of size 6', () => {
+    it('appends to a tree of size 6', () => {
       expect(
         push(
           [
@@ -178,6 +178,154 @@ describe('btree of node size 2', () => {
             ],
           ],
           [3, [[3, [[3, [[3, [['i'], ['j', 'k']]]]]]]]],
+        ],
+      ]);
+    });
+  });
+
+  describe('unshift', () => {
+    it('prepends to a tree of size 0', () => {
+      expect(addAt(0, [], 'z')).toEqual(['z']);
+    });
+
+    it('prepends to a tree of size 1', () => {
+      expect(addAt(0, ['z'], 'y')).toEqual(['y', 'z']);
+    });
+
+    it('prepends to a tree of size 2', () => {
+      expect(addAt(0, ['y', 'z'], 'x')).toEqual([3, [['x'], ['y', 'z']]]);
+    });
+
+    it('prepends to a tree of size 3', () => {
+      expect(addAt(0, [3, [['x'], ['y', 'z']]], 'w')).toEqual([
+        4,
+        [
+          ['w', 'x'],
+          ['y', 'z'],
+        ],
+      ]);
+    });
+
+    it('prepends to a tree of size 4', () => {
+      expect(
+        addAt(
+          0,
+          [
+            4,
+            [
+              ['w', 'x'],
+              ['y', 'z'],
+            ],
+          ],
+          'v',
+        ),
+      ).toEqual([
+        5,
+        [
+          [3, [['v'], ['w', 'x']]],
+          [2, [['y', 'z']]],
+        ],
+      ]);
+    });
+
+    it('prepends to a tree of size 5', () => {
+      expect(
+        addAt(
+          0,
+          [
+            5,
+            [
+              [3, [['v'], ['w', 'x']]],
+              [2, [['y', 'z']]],
+            ],
+          ],
+          'u',
+        ),
+      ).toEqual([
+        6,
+        [
+          [
+            4,
+            [
+              ['u', 'v'],
+              ['w', 'x'],
+            ],
+          ],
+          [2, [['y', 'z']]],
+        ],
+      ]);
+    });
+
+    it('prepends to a tree of size 6', () => {
+      expect(
+        addAt(
+          0,
+          [
+            6,
+            [
+              [
+                4,
+                [
+                  ['u', 'v'],
+                  ['w', 'x'],
+                ],
+              ],
+              [2, [['y', 'z']]],
+            ],
+          ],
+          't',
+        ),
+      ).toEqual([
+        7,
+        [
+          [
+            5,
+            [
+              [3, [['t'], ['u', 'v']]],
+              [2, [['w', 'x']]],
+            ],
+          ],
+          [2, [[2, [['y', 'z']]]]],
+        ],
+      ]);
+    });
+
+    it('prepends to a tree of size 7', () => {
+      expect(
+        addAt(
+          0,
+          [
+            7,
+            [
+              [
+                5,
+                [
+                  [3, [['t'], ['u', 'v']]],
+                  [2, [['w', 'x']]],
+                ],
+              ],
+              [2, [[2, [['y', 'z']]]]],
+            ],
+          ],
+          's',
+        ),
+      ).toEqual([
+        8,
+        [
+          [
+            6,
+            [
+              [
+                4,
+                [
+                  ['s', 't'],
+                  ['u', 'v'],
+                ],
+              ],
+              [2, [['w', 'x']]],
+            ],
+          ],
+          [2, [[2, [['y', 'z']]]]],
         ],
       ]);
     });

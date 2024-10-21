@@ -1,7 +1,7 @@
 {
   "name": "@bablr/btree",
   "description": "Functional utilities for working with btrees such as those used in agAST",
-  "version": "0.0.0",
+  "version": "0.1.1",
   "author": "Conrad Buck<conartist6@gmail.com>",
   "type": "module",
   "files": [

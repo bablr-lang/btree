@@ -1,13 +1,18 @@
 # @bablr/btree
 
-Functional utilities for working with btrees such as those used in agAST. These trees could also correctly be termed sum trees, and are represented as:
+Functional utilities for working with btrees such as those used in agAST.
 
 ```js
-let leafNode = [...data];
+expect(push(['a', 'b'], 'c')).toEqual([
+  3,
+  [['a'], ['b', 'c']],
+]);
 
-let branchNode = [sum, [...nodes]];
-
-let tree = [3, [[node1, node2], [node3]]];
+expect(addAt(0, [3, [['x'], ['y', 'z']]], 'w')).toEqual([
+  4,
+  [
+    ['w', 'x'],
+    ['y', 'z'],
+  ],
+]);
 ```
-
-You can differentiate non-leaf nodes because they have a number as their first element. This is possible the data stored in this tree will always be object-typed.

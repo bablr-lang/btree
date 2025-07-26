@@ -16,7 +16,7 @@
     "test": "mocha test/*.test.js"
   },
   "dependencies": {
-    "@iter-tools/imm-stack": "1.1.0"
+    "@iter-tools/imm-stack": "1.2.0"
   },
   "devDependencies": {
     "@bablr/eslint-config-base": "github:bablr-lang/eslint-config-base#c97bfa4b3663f8378e9b3e42bb5a41e685406cf9",

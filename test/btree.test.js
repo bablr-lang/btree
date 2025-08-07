@@ -2,7 +2,7 @@ import { expect } from 'expect';
 
 import { buildModule } from '@bablr/btree/enhanceable';
 
-const { push, pop, addAt } = buildModule(2);
+const { push, removeAt, addAt } = buildModule(2);
 
 describe('btree of node size 2', () => {
   describe('push', () => {
@@ -331,22 +331,22 @@ describe('btree of node size 2', () => {
     });
   });
 
-  describe('pop', () => {
-    it('deletes from a tree of size 1', () => {
-      expect(pop(['a'])).toEqual([]);
+  describe('removeAt', () => {
+    it('removes from a tree of size 1', () => {
+      expect(removeAt(-1, ['a'])).toEqual([]);
     });
 
-    it('deletes from a tree of size 2', () => {
-      expect(pop(['a', 'b'])).toEqual(['a']);
+    it('removes from a tree of size 2', () => {
+      expect(removeAt(-1, ['a', 'b'])).toEqual(['a']);
     });
 
-    it('deletes from a tree of size 3', () => {
-      expect(pop([3, [['a', 'b'], ['c']]])).toEqual(['a', 'b']);
+    it('removes from a tree of size 3', () => {
+      expect(removeAt(-1, [3, [['a', 'b'], ['c']]])).toEqual(['a', 'b']);
     });
 
-    it('deletes from a tree of size 4', () => {
+    it('removes from a tree of size 4', () => {
       expect(
-        pop([
+        removeAt(-1, [
           4,
           [
             ['a', 'b'],
@@ -356,9 +356,21 @@ describe('btree of node size 2', () => {
       ).toEqual([3, [['a', 'b'], ['c']]]);
     });
 
-    it('deletes from a tree of size 5', () => {
+    it('removes from the middle of a tree of size 4', () => {
       expect(
-        pop([
+        removeAt(1, [
+          4,
+          [
+            ['a', 'b'],
+            ['c', 'd'],
+          ],
+        ]),
+      ).toEqual([3, [['a'], ['c', 'd']]]);
+    });
+
+    it('removes from a tree of size 5', () => {
+      expect(
+        removeAt(-1, [
           5,
           [
             [3, [['a', 'b'], ['c']]],

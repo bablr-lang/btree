@@ -358,6 +358,15 @@ describe('btree of node size 2', () => {
 
     it('removes from the middle of a tree of size 4', () => {
       expect(
+        removeAt(0, [
+          4,
+          [
+            ['a', 'b'],
+            ['c', 'd'],
+          ],
+        ]),
+      ).toEqual([3, [['b'], ['c', 'd']]]);
+      expect(
         removeAt(1, [
           4,
           [
@@ -366,6 +375,18 @@ describe('btree of node size 2', () => {
           ],
         ]),
       ).toEqual([3, [['a'], ['c', 'd']]]);
+
+      expect(
+        removeAt(2, [
+          4,
+          [
+            ['a', 'b'],
+            ['c', 'd'],
+          ],
+        ]),
+      ).toEqual([3, [['a', 'b'], ['d']]]);
+
+      expect(removeAt(3, [4, [['a', 'b'], ['c']]])).toEqual([3, [['a', 'b'], ['c']]]);
     });
 
     it('removes from a tree of size 5', () => {

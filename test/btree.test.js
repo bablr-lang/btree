@@ -2,7 +2,7 @@ import { expect } from 'expect';
 
 import { buildModule } from '@bablr/btree/enhanceable';
 
-const { push, removeAt, addAt } = buildModule(2);
+const { push, removeAt, addAt, concat } = buildModule(2);
 
 describe('btree of node size 2', () => {
   describe('push', () => {
@@ -178,6 +178,88 @@ describe('btree of node size 2', () => {
             ],
           ],
           [3, [[3, [[3, [[3, [['i'], ['j', 'k']]]]]]]]],
+        ],
+      ]);
+    });
+  });
+
+  describe('concat', () => {
+    it('concats 2 trees of size 1', () => {
+      expect(concat([1, ['a']], [1, ['b']])).toEqual([
+        2,
+        [
+          [1, ['a']],
+          [1, ['b']],
+        ],
+      ]);
+    });
+
+    it('concats tree with empty tree', () => {
+      expect(concat([1, ['a']], [])).toEqual(['a']);
+    });
+
+    it('concats 2 trees of unequal height', () => {
+      expect(
+        concat(
+          [1, ['a']],
+          [
+            2,
+            [
+              [1, ['b']],
+              [1, ['c']],
+            ],
+          ],
+        ),
+      ).toEqual([
+        3,
+        [
+          [
+            2,
+            [
+              [1, ['a']],
+              [1, ['b']],
+            ],
+          ],
+          [1, [[1, ['c']]]],
+        ],
+      ]);
+    });
+
+    it('concats 2 trees of height 2', () => {
+      expect(
+        concat(
+          [
+            2,
+            [
+              [1, ['a']],
+              [1, ['b']],
+            ],
+          ],
+          [
+            2,
+            [
+              [1, ['c']],
+              [1, ['d']],
+            ],
+          ],
+        ),
+      ).toEqual([
+        4,
+        [
+          [
+            2,
+            [
+              [1, ['a']],
+              [1, ['b']],
+            ],
+          ],
+          [
+            2,
+            [
+              [1, ['c']],
+              [1, ['d']],
+            ],
+          ],
         ],
       ]);
     });

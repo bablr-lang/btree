@@ -406,5 +406,37 @@ describe('btree of node size 2', () => {
         ],
       ]);
     });
+
+    it('removes first from a tree of size 5', () => {
+      expect(
+        removeAt(0, [
+          5,
+          [
+            [3, [['a', 'b'], ['c']]],
+            [2, [['d', 'e']]],
+          ],
+        ]),
+      ).toEqual([
+        4,
+        [
+          [2, [['b'], ['c']]],
+          [2, [['d', 'e']]],
+        ],
+      ]);
+    });
+
+    describe('sad path', () => {
+      it('Errors on invalid index', () => {
+        expect(() => {
+          removeAt(30, [
+            6,
+            [
+              [3, [['a', 'b'], ['c']]],
+              [3, [['d', 'e'], ['f']]],
+            ],
+          ]);
+        }).toThrowError('Index exceeds tree bounds');
+      });
+    });
   });
 });

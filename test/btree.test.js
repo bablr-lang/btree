@@ -185,17 +185,11 @@ describe('btree of node size 2', () => {
 
   describe('concat', () => {
     it('concats 2 trees of size 1', () => {
-      expect(concat([1, ['a']], [1, ['b']])).toEqual([
-        2,
-        [
-          [1, ['a']],
-          [1, ['b']],
-        ],
-      ]);
+      expect(concat([1, ['a']], [1, ['b']])).toEqual(['a', 'b']);
     });
 
     it('concats tree with empty tree', () => {
-      expect(concat([1, ['a']], [])).toEqual(['a']);
+      expect(concat([1, ['a']], [])).toEqual([1, ['a']]);
     });
 
     it('concats 2 trees of unequal height', () => {

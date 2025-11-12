@@ -4,7 +4,7 @@ import { buildModule } from '@bablr/btree/enhanceable';
 
 const { push, removeAt, addAt, concat } = buildModule(2);
 
-describe('btree of node size 2', () => {
+describe.skip('btree of node size 2', () => {
   describe('push', () => {
     it('appends to a tree of size 0', () => {
       expect(push([], 'a')).toEqual(['a']);

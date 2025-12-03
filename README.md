@@ -9,8 +9,9 @@ let tree = btree.fromValues([]);
 tree = btree.push('a');
 tree = btree.push('b');
 tree = btree.push('c');
+let tree3 = tree;
 tree = btree.concat(tree, tree);
-tree = btree.concat(tree, tree);
+tree = btree.concat(tree3, tree);
 
 btree.getSize(tree); // 9
 btree.getAt(-2, tree); // 'b'

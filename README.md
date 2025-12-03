@@ -1,18 +1,18 @@
 # @bablr/btree
 
-Functional utilities for working with btrees such as those used in agAST.
+This library offers a set of functional utilities for working with immutable btrees such as those used in agAST.
 
 ```js
-expect(push(['a', 'b'], 'c')).toEqual([
-  3,
-  [['a'], ['b', 'c']],
-]);
+import * as btree from '@bablr/btree';
 
-expect(addAt(0, [3, [['x'], ['y', 'z']]], 'w')).toEqual([
-  4,
-  [
-    ['w', 'x'],
-    ['y', 'z'],
-  ],
-]);
+let tree = btree.fromValues([]);
+tree = btree.push('a');
+tree = btree.push('b');
+tree = btree.push('c');
+tree = btree.concat(tree, tree);
+tree = btree.concat(tree, tree);
+
+btree.getSize(tree); // 9
+btree.getAt(-2, tree); // 'b'
+[...btree.traverse(tree)]; // ['a', 'b', 'c', 'a', 'b', 'c', 'a', 'b', 'c']
 ```

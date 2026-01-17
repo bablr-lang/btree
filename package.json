@@ -27,7 +27,10 @@
     "mocha": "10.7.3",
     "prettier": "^2.6.2"
   },
-  "repository": "github:bablr-lang/btree",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bablr-lang/btree.git"
+  },
   "homepage": "https://github.com/bablr-lang/btree",
   "license": "MIT"
 }

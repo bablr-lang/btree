@@ -8,7 +8,9 @@
     "lib"
   ],
   "exports": {
-    ".": "./lib/index.js",
+    "./list": "./lib/list.js",
+    "./map": "./lib/map.js",
+    "./set": "./lib/set.js",
     "./enhanceable": "./lib/enhanceable.js"
   },
   "sideEffects": false,

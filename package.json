@@ -8,6 +8,7 @@
     "lib"
   ],
   "exports": {
+    "./keyed-list": "./lib/keyed-list.js",
     "./list": "./lib/list.js",
     "./map": "./lib/map.js",
     "./set": "./lib/set.js",

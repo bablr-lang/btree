@@ -7,19 +7,19 @@ const { push, removeAt, addAt, concat } = buildModule(2);
 describe.skip('btree of node size 2', () => {
   describe('push', () => {
     it('appends to a tree of size 0', () => {
-      expect(push([], 'a')).toEqual(['a']);
+      expect(push('a', [])).toEqual(['a']);
     });
 
     it('appends to a tree of size 1', () => {
-      expect(push(['a'], 'b')).toEqual(['a', 'b']);
+      expect(push('b', ['a'])).toEqual(['a', 'b']);
     });
 
     it('appends to a tree of size 2', () => {
-      expect(push(['a', 'b'], 'c')).toEqual([3, [['a'], ['b', 'c']]]);
+      expect(push('c', ['a', 'b'])).toEqual([3, [['a'], ['b', 'c']]]);
     });
 
     it('appends to a tree of size 3', () => {
-      expect(push([3, [['a'], ['b', 'c']]], 'd')).toEqual([
+      expect(push('d', [3, [['a'], ['b', 'c']]])).toEqual([
         4,
         [
           [2, [['a'], ['b']]],
@@ -30,16 +30,13 @@ describe.skip('btree of node size 2', () => {
 
     it('appends to a tree of size 4', () => {
       expect(
-        push(
+        push('e', [
+          4,
           [
-            4,
-            [
-              [2, [['a'], ['b']]],
-              [2, [['c', 'd']]],
-            ],
+            [2, [['a'], ['b']]],
+            [2, [['c', 'd']]],
           ],
-          'e',
-        ),
+        ]),
       ).toEqual([
         5,
         [
@@ -51,16 +48,13 @@ describe.skip('btree of node size 2', () => {
 
     it('appends to a tree of size 5', () => {
       expect(
-        push(
+        push('f', [
+          5,
           [
-            5,
-            [
-              [2, [['a'], ['b']]],
-              [3, [['c'], ['d', 'e']]],
-            ],
+            [2, [['a'], ['b']]],
+            [3, [['c'], ['d', 'e']]],
           ],
-          'f',
-        ),
+        ]),
       ).toEqual([
         6,
         [
@@ -78,16 +72,13 @@ describe.skip('btree of node size 2', () => {
 
     it('appends to a tree of size 6', () => {
       expect(
-        push(
+        push('g', [
+          6,
           [
-            6,
-            [
-              [3, [['a', 'b'], ['c']]],
-              [3, [['d'], ['e', 'f']]],
-            ],
+            [3, [['a', 'b'], ['c']]],
+            [3, [['d'], ['e', 'f']]],
           ],
-          'g',
-        ),
+        ]),
       ).toEqual([
         7,
         [
@@ -105,22 +96,19 @@ describe.skip('btree of node size 2', () => {
 
     it('adds to a tree of size 7', () => {
       expect(
-        push(
+        push('h', [
+          7,
           [
-            7,
             [
+              5,
               [
-                5,
-                [
-                  [3, [['a', 'b'], ['c']]],
-                  [2, [['d'], ['e']]],
-                ],
+                [3, [['a', 'b'], ['c']]],
+                [2, [['d'], ['e']]],
               ],
-              [2, [[2, [['f', 'g']]]]],
             ],
+            [2, [[2, [['f', 'g']]]]],
           ],
-          'h',
-        ),
+        ]),
       ).toEqual([
         8,
         [
@@ -145,7 +133,7 @@ describe.skip('btree of node size 2', () => {
       const addNodes = (n) => {
         let tree = [];
         for (let i = 0; i < n; i++) {
-          tree = push(tree, buildLeaf());
+          tree = push(buildLeaf(), tree);
         }
         return tree;
       };
@@ -261,19 +249,19 @@ describe.skip('btree of node size 2', () => {
 
   describe('unshift', () => {
     it('prepends to a tree of size 0', () => {
-      expect(addAt(0, [], 'z')).toEqual(['z']);
+      expect(addAt(0, 'z', [])).toEqual(['z']);
     });
 
     it('prepends to a tree of size 1', () => {
-      expect(addAt(0, ['z'], 'y')).toEqual(['y', 'z']);
+      expect(addAt(0, 'y', ['z'])).toEqual(['y', 'z']);
     });
 
     it('prepends to a tree of size 2', () => {
-      expect(addAt(0, ['y', 'z'], 'x')).toEqual([3, [['x'], ['y', 'z']]]);
+      expect(addAt(0, 'x', ['y', 'z'])).toEqual([3, [['x'], ['y', 'z']]]);
     });
 
     it('prepends to a tree of size 3', () => {
-      expect(addAt(0, [3, [['x'], ['y', 'z']]], 'w')).toEqual([
+      expect(addAt(0, 'w', [3, [['x'], ['y', 'z']]])).toEqual([
         4,
         [
           ['w', 'x'],
@@ -284,17 +272,13 @@ describe.skip('btree of node size 2', () => {
 
     it('prepends to a tree of size 4', () => {
       expect(
-        addAt(
-          0,
+        addAt(0, 'v', [
+          4,
           [
-            4,
-            [
-              ['w', 'x'],
-              ['y', 'z'],
-            ],
+            ['w', 'x'],
+            ['y', 'z'],
           ],
-          'v',
-        ),
+        ]),
       ).toEqual([
         5,
         [
@@ -306,17 +290,13 @@ describe.skip('btree of node size 2', () => {
 
     it('prepends to a tree of size 5', () => {
       expect(
-        addAt(
-          0,
+        addAt(0, 'u', [
+          5,
           [
-            5,
-            [
-              [3, [['v'], ['w', 'x']]],
-              [2, [['y', 'z']]],
-            ],
+            [3, [['v'], ['w', 'x']]],
+            [2, [['y', 'z']]],
           ],
-          'u',
-        ),
+        ]),
       ).toEqual([
         6,
         [
@@ -334,23 +314,19 @@ describe.skip('btree of node size 2', () => {
 
     it('prepends to a tree of size 6', () => {
       expect(
-        addAt(
-          0,
+        addAt(0, 't', [
+          6,
           [
-            6,
             [
+              4,
               [
-                4,
-                [
-                  ['u', 'v'],
-                  ['w', 'x'],
-                ],
+                ['u', 'v'],
+                ['w', 'x'],
               ],
-              [2, [['y', 'z']]],
             ],
+            [2, [['y', 'z']]],
           ],
-          't',
-        ),
+        ]),
       ).toEqual([
         7,
         [
@@ -368,23 +344,19 @@ describe.skip('btree of node size 2', () => {
 
     it('prepends to a tree of size 7', () => {
       expect(
-        addAt(
-          0,
+        addAt(0, 's', [
+          7,
           [
-            7,
             [
+              5,
               [
-                5,
-                [
-                  [3, [['t'], ['u', 'v']]],
-                  [2, [['w', 'x']]],
-                ],
+                [3, [['t'], ['u', 'v']]],
+                [2, [['w', 'x']]],
               ],
-              [2, [[2, [['y', 'z']]]]],
             ],
+            [2, [[2, [['y', 'z']]]]],
           ],
-          's',
-        ),
+        ]),
       ).toEqual([
         8,
         [

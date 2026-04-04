@@ -6,9 +6,9 @@ This library offers a set of functional utilities for working with immutable btr
 import * as btree from '@bablr/btree';
 
 let tree = btree.fromValues([]);
-tree = btree.push('a');
-tree = btree.push('b');
-tree = btree.push('c');
+tree = btree.push('a', tree);
+tree = btree.push('b', tree);
+tree = btree.push('c', tree);
 let tree3 = tree;
 tree = btree.concat(tree, tree);
 tree = btree.concat(tree3, tree);
